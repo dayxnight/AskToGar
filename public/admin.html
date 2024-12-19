@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>semua pertanyaan</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+           <h1>daftar pertanyaan</h1>
+        </div>
+        
+       
+    <ul id="questionList">
+        <!-- Pertanyaan akan dimasukkan di sini oleh JavaScript -->
+    </ul>
+    <div id="overlay" style="display:none">
+       
+    </div>
+    
+    <div id="popup" style="display:none;">
+       <h4>
+          pesan:
+       </h4>
+       <p id="pertanyaan">
+          
+       </p>
+       <button id="closePopup">close</button>
+    </div>
+    
+    </div>
+    
+    
+
+    <script>
+        fetch('/questions')
+            .then(response => response.json())
+            .then(questions => {
+                const questionList = document.getElementById('questionList');
+                questions.forEach(question => {
+                    const li = document.createElement('li');
+                    li.textContent = question;
+                    li.addEventListener("click", () => {
+document.getElementById('pertanyaan').textContent = question;
+
+                        document.getElementById('overlay').style.display = 'block';
+                        document.getElementById("popup").style.display = 'flex';
+                    })
+                    questionList.appendChild(li);
+                });
+            });
+        document.getElementById("closePopup").addEventListener("click", () => {
+            document.getElementById("popup").style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        });
+    </script>
+</body>
+</html>

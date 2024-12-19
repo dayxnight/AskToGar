@@ -10,6 +10,7 @@ const io = socketIo(server);
 let questions = []; // Array untuk menyimpan semua pertanyaan
 
 app.use(express.static('public'));
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
